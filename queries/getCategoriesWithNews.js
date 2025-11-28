@@ -24,23 +24,7 @@ export const GET_CATEGORIES_WITH_NEWS = gql`
             name
             slug
           }
-          comments {
-            id
-            user {
-              id
-              username
-            }
-            content
-            approved
-            createdAt
-          }
-          likes {
-            id
-            user {
-              id
-              username
-            }
-          }
+         
         }
       }
     }

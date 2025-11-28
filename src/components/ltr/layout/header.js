@@ -9,7 +9,6 @@ import { GET_CATEGORIES_WITH_NEWS } from "../../../../queries/getCategoriesWithN
 import useSmartErrorHandler from "@/hooks/useSmartErrorHandler";
 import AuthModal from "@/components/common/AuthModal";
 import { useAuth } from "@/context/AuthContext";
-import { toast } from "react-toastify";
 
 const HomeLinks = [
   { href: "/", text: "Home – Layout 1", badge: "NEW" },
@@ -29,7 +28,6 @@ const HomeLinks = [
   { href: "/post-template-three", text: "Post - layout 3" },
   { href: "/", text: "Home" },
   { href: "/about", text: "About Us" },
-  { href: "/privacy", text: "Privacy Policy" },
   // { href: '/typography', text: 'Typography' },
   { href: "/contact", text: "Contact" },
   { href: "/faq", text: "Faq" },
@@ -46,48 +44,8 @@ const Header = () => {
   const { loading, error, data, refetch } = useQuery(GET_CATEGORIES_WITH_NEWS);
   const errorUI = useSmartErrorHandler(error, refetch);
 
-  const mainCategories = data?.categories?.slice(0, 7) || [];
-  const otherCategories = data?.categories?.slice(10) || [];
-
-  const [temperature, setTemperature] = useState(null);
-  const [condition, setCondition] = useState("");
-  const [location, setLocation] = useState("");
-  const API_KEY = "06ff231fa72d44d5b40105449252807";
-
-  // Function to fetch weather by city or coords
-  async function fetchWeather(query) {
-    try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${query}&aqi=no`
-      );
-      const data = await response.json();
-      setTemperature(data.current.temp_c);
-      setCondition(data.current.condition.text);
-      setLocation(data.location.name);
-    } catch (error) {
-      console.error("Error fetching weather:", error);
-    }
-  }
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          fetchWeather(`${lat},${lon}`);
-        },
-        (error) => {
-          console.warn("Geolocation error:", error.message);
-          // Fallback to default city
-          fetchWeather("Kochi");
-        }
-      );
-    } else {
-      console.warn("Geolocation not supported, using fallback city");
-      fetchWeather("Kochi");
-    }
-  }, []);
+  const mainCategories = data?.categories?.slice(0, 11) || [];
+  const otherCategories = data?.categories?.slice(6) || [];
 
   const toggleSidebar = () => {
     setSidebarActive(!isSidebarActive);
@@ -234,7 +192,7 @@ const Header = () => {
                       {/* End of /. header social */}
                     </li>
                     <li className="d-none d-sm-block">
-                      <Link className="nav-link" href="/">
+                      <Link className="nav-link" href="/contact">
                         Home
                       </Link>
                     </li>
@@ -248,11 +206,6 @@ const Header = () => {
                         About Us
                       </Link>
                     </li>
-                    <li className="d-none d-sm-block">
-                      <Link className="nav-link" href="/privacy">
-                        Privacy Policy
-                      </Link>
-                    </li>
                     {/* <li className="d-none d-sm-block">
                       <Link href="#">Donation</Link>
                     </li> */}
@@ -263,68 +216,57 @@ const Header = () => {
               {/* Start header top right menu */}
               <div className="col-auto ms-auto">
                 <div className="header-right-menu">
-                  <ul className="d-flex justify-content-end align-items-center gap-3">
+                  <ul className="d-flex justify-content-end">
                     {/* <li className="d-md-block d-none">
-                      Currency: {" "}
+                      Currency:{" "}
                       <Link href="#" className="fw-bold">
                         USD
                       </Link>
                     </li>
                     <li className="d-md-block d-none">
-                      Wishlist: {" "}
+                      Wishlist:{" "}
                       <Link href="#" className="fw-bold">
                         12
                       </Link>
                     </li> */}
                     <li>
-                      <a
-                        href="https://gopi333888.github.io/outline-kerala-news-app-apk/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="fw-bold text-primary text-decoration-none"
-                        style={{ letterSpacing: "0.01em" }}
-                      >
-                        Download Our App
-                      </a>
-                    </li>
-                    <li>
-                      {!isAuthenticated ? (
-                        <>
-                          <a
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setAuthModalTab("signup");
-                              setAuthModalOpen(true);
-                            }}
-                          >
-                            <i className="fa fa-lock" /> Sign Up
-                          </a>
-                          <span className="fw-bold">/</span>
-                          <a
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setAuthModalTab("login");
-                              setAuthModalOpen(true);
-                            }}
-                          >
-                            Login
-                          </a>
-                        </>
-                      ) : (
-                        <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            logout(); // 👈 this removes token & updates UI
-                            toast.info("Logged out successfully.");
-                          }}
-                        >
-                          <i className="fa fa-sign-out-alt" /> Logout
-                        </a>
-                      )}
-                    </li>
+      {!isAuthenticated ? (
+        <>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              setAuthModalTab("signup");
+              setAuthModalOpen(true);
+            }}
+          >
+            <i className="fa fa-lock" /> Sign Up
+          </a>
+          <span className="fw-bold">/</span>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              setAuthModalTab("login");
+              setAuthModalOpen(true);
+            }}
+          >
+            Login
+          </a>
+        </>
+      ) : (
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            logout(); // 👈 this removes token & updates UI
+            toast.info("Logged out successfully.");
+          }}
+        >
+          <i className="fa fa-sign-out-alt" /> Logout
+        </a>
+      )}
+    </li>
                   </ul>
                 </div>
               </div>
@@ -355,10 +297,7 @@ const Header = () => {
                     />
                   </Link>
                   <div className="fs-5 fw-semibold weather-text">
-                    <WiDayLightning size={28} />{" "}
-                    {temperature !== null
-                      ? `${temperature}°C `
-                      : "Loading..."}
+                    <WiDayLightning size={28} /> 11.23°C
                   </div>
                 </div>
               </div>
@@ -377,13 +316,7 @@ const Header = () => {
 
               {/* Right: Date */}
               <div className="col-auto text-end fw-semibold text-uppercase date-text">
-                {new Date()
-                  .toLocaleDateString("en-US", {
-                    weekday: "long",
-                    month: "long",
-                    day: "numeric",
-                  })
-                  .toUpperCase()}
+                Friday, August 4
               </div>
             </div>
           </div>
@@ -660,16 +593,16 @@ const Header = () => {
               </ul>
             </div>
 
-            {/* Desktop Search and Download Buttons */}
-            <div className="d-none d-lg-flex align-items-center gap-3">
-              {/* <button
+            {/* Desktop Search Button */}
+            {/* <div className="d-none d-lg-flex">
+              <button
                 type="button"
                 className="btn btn-search_two ms-auto"
                 onClick={handleSearchButtonClick}
               >
                 <i className="fa fa-search fa-lg" />
-              </button> */}
-            </div>
+              </button>
+            </div> */}
           </div>
         </nav>
 
