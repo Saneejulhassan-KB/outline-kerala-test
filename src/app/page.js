@@ -19,6 +19,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES_WITH_NEWS } from "../../queries/getCategoriesWithNews";
 import useSmartErrorHandler from "@/hooks/useSmartErrorHandler";
 import GoldTicker from "@/components/ltr/gold-ticker-carousal/page";
+import AdvertisementPopup from "@/components/ltr/advertisement-popup/advertisement-popup";
 
 export default function Home() {
   const { loading, error, data, refetch } = useQuery(GET_CATEGORIES_WITH_NEWS);
@@ -184,128 +185,7 @@ export default function Home() {
         <section className="slider-inner">
           <div className="container-fluid p-0">
             <div className="row thm-margin">
-              {/* <div className="col-6 col-sm-6 thm-padding">
-                    <div className="slider-post post-height-4">
-                      <Link href="/" className="news-image">
-                        <img src="./udf.webp" alt="" className="img-fluid" />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Fashion</span>
-                        <h4>
-                          <Link href="/">
-                            Ut venenatis nulla vitae quam pharetra, ultrices
-                            commodo augue sodales.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
-              {/* <div className="col-6 col-sm-6 thm-padding">
-                    <div className="slider-post post-height-4">
-                      <Link href="/" className="news-image">
-                        <img
-                          src="./fashion.avif"
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Technology</span>
-                        <h4>
-                          <Link href="/">
-                            Vivamus tempus nulla in arcu interdum, vel
-                            condimentum urna facilisis.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
-              {/* <div className="col-6 col-sm-6 d-md-block d-none thm-padding">
-                    <div className="slider-post post-height-4">
-                      <Link href="/" className="news-image">
-                        <img src="./udf.webp" alt="" className="img-fluid" />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Fashion</span>
-                        <h4>
-                          <Link href="/">
-                            Ut venenatis nulla vitae quam pharetra, ultrices
-                            commodo augue sodales.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
-              {/* <div className="col-6 col-sm-6 d-md-block d-none thm-padding">
-                    <div className="slider-post post-height-4">
-                      <Link href="/" className="news-image">
-                        <img
-                          src="./fashion.avif"
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Technology</span>
-                        <h4>
-                          <Link href="/">
-                            Vivamus tempus nulla in arcu interdum, vel
-                            condimentum urna facilisis.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
-              {/* <div className="col-md-12 col-sm-12 d-md-block d-none thm-padding">
-                    <div className="slider-post post-height-4">
-                      <Link href="/" className="news-image">
-                        <img
-                          src="assets/images/masonry/04.jpg"
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Travel</span>
-                        <h4>
-                          <Link href="#">
-                            Vivamus tempus nulla in arcu interdum, vel condimentum
-                            urna facilisis.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
+             
 
               <div className="col-md-6 col-md-6 thm-padding ">
                 <div className="slider-wrapper">
@@ -318,32 +198,7 @@ export default function Home() {
 
               <div className="col-md-6 col-md-6 thm-padding">
                 <div className="row slider-right-post thm-margin">
-                  {/* <div className="col-md-12 col-sm-12 d-md-block d-none thm-padding">
-                    <div className="slider-post post-height-2">
-                      <Link href="/" className="news-image">
-                        <img
-                          src="./kerala-boat-travel.avif
-                          alt=""
-                          className="img-fluid"
-                        />
-                      </Link>
-                      <div className="post-text">
-                        <span className="post-category">Travel</span>
-                        <h4>
-                          <Link href="/">
-                            Pellentesque at ligula ultrices, luctus turpis quis,
-                            convallis libero.
-                          </Link>
-                        </h4>
-                        <ul className="align-items-center authar-info d-flex flex-wrap gap-1">
-                          <li>
-                            By <span className="editor-name">David hall</span>
-                          </li>
-                          <li>Aug 16, 2023</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> */}
+                
                   {fourImageLayoutNews.map((news, index) => (
                     <div
                       className={`col-6 col-sm-6 thm-padding ${
@@ -1263,6 +1118,8 @@ export default function Home() {
         </section>
       </main>
       {/* *** END OF /. PAGE MAIN CONTENT *** */}
+      {/* *** END OF /. PAGE MAIN CONTENT *** */}
+      <AdvertisementPopup />
     </Layout>
   );
 }
