@@ -20,6 +20,8 @@ import { GET_CATEGORIES_WITH_NEWS } from "../../queries/getCategoriesWithNews";
 import useSmartErrorHandler from "@/hooks/useSmartErrorHandler";
 import GoldTicker from "@/components/ltr/gold-ticker-carousal/page";
 import AdvertisementPopup from "@/components/ltr/advertisement-popup/advertisement-popup";
+// import ElectionWidget from "@/components/ltr/election-widget/election-widget";
+import ElectionCarousel from "@/components/ltr/election-carousel/election-carousel";
 
 export default function Home() {
   const { loading, error, data, refetch } = useQuery(GET_CATEGORIES_WITH_NEWS);
@@ -171,6 +173,14 @@ export default function Home() {
         <NewsTicker trendingNews={trendingNews} />
         {/* <GoldTicker /> */}
         {/*  END OF /. NEWSTRICKER */}
+        
+        {/* START ELECTION CAROUSEL */}
+        <ElectionCarousel />
+        {/* END OF /. ELECTION CAROUSEL */}
+
+        {/* START ELECTION WIDGET */}
+        {/* <ElectionWidget /> */}
+        {/* END OF /. ELECTION WIDGET */}
         {/* START FEATURE SECTION */}
         <div
           className="bg-img feature-section py-4 py-lg-3 py-xl-4"
