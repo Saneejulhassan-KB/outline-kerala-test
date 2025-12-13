@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_WARDS_DATA = gql`
   query {
-    wards {
+    wards(page:1, pageSize:20) {
       wardNumber
       wardName
       totalVoters
