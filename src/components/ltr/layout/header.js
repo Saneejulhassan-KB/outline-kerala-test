@@ -44,7 +44,7 @@ const Header = () => {
   const { loading, error, data, refetch } = useQuery(GET_CATEGORIES_WITH_NEWS);
   const errorUI = useSmartErrorHandler(error, refetch);
 
-  const mainCategories = data?.categories?.slice(0, 11) || [];
+  const mainCategories = data?.categories?.slice(0, 6) || [];
   const otherCategories = data?.categories?.slice(6) || [];
 
   const toggleSidebar = () => {
@@ -566,30 +566,63 @@ const Header = () => {
 
                 {/* Other Categories */}
                 {otherCategories.length > 0 && (
-                  <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                    >
-                      <i className="fas fa-ellipsis-h" />
-                    </a>
-                    <ul className="dropdown-menu">
-                      {otherCategories.map((category) => (
-                        <li key={category.id}>
-                          <Link
-                            className="dropdown-item"
-                            href={`/category/${category.slug}`}
-                            onClick={handleNavItemClick}
-                          >
-                            {category.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                )}
+  <li className="nav-item dropdown">
+    <a
+      className="nav-link dropdown-toggle"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+    >
+      <i className="fas fa-ellipsis-h" />
+    </a>
+
+    <ul className="dropdown-menu">
+      {otherCategories.map((category) => {
+        const hasSub =
+          category.subcategories && category.subcategories.length > 0;
+
+        return hasSub ? (
+          /* Category WITH subcategories */
+          <li key={category.id} className="dropdown-submenu">
+            <a
+              href="#"
+              className="dropdown-item dropdown-toggle"
+              data-bs-toggle="dropdown"
+            >
+              {category.name}
+            </a>
+
+            <ul className="dropdown-menu">
+              {category.subcategories.map((sub) => (
+                <li key={sub.id}>
+                  <Link
+                    href={`/subcategory/${sub.slug}`}
+                    className="dropdown-item"
+                    onClick={handleNavItemClick}
+                  >
+                    {sub.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ) : (
+          /* Category WITHOUT subcategories */
+          <li key={category.id}>
+            <Link
+              className="dropdown-item"
+              href={`/category/${category.slug}`}
+              onClick={handleNavItemClick}
+            >
+              {category.name}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  </li>
+)}
+
               </ul>
             </div>
 

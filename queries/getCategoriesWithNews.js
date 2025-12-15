@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_CATEGORIES_WITH_NEWS = gql`
   query {
-    categories {
+    categories(page:1, pageSize:30){
       id
       name
       slug
